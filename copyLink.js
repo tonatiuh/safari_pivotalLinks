@@ -1,17 +1,23 @@
 $(document).ready(function(){
-  setTimeout(linkStoryItems, 3000);
+  setTimeout(linkStoryItems, 10000);
 
   function linkStoryItems(){
     $('.items').on('click', '.story', function(e){
-      if (e.shiftKey) {
-        var storyId   = $(this).data('id');
-        var storyLink = 'https://www.pivotaltracker.com/story/show/'+storyId;
-        var storyName = $(this).find('.story_name').text();
-        var mdText    = "[" + storyName + "](" + storyLink + ")";
+      var storyId   = $(this).data('id');
+      var storyName = $(this).find('.story_name').text();
+      var mdText    = '';
 
+      if (e.shiftKey) {
+        mdText = "[" + storyId + "](" + storyName + ")";
+        prompt(mdText);
+      }
+
+      if (e.altKey) {
+        mdText = "[" + storyName + "](" + storyId + ")";
         prompt(mdText);
       }
     });
-  };
 
+    console.log('pivotal - copyLink.js loaded!')
+  };
 });
